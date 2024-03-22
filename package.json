@@ -1,0 +1,32 @@
+{
+  "name": "delenitidolorem",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@swc/core": "^1.4.0",
+    "@swc/jest": "^0.2.36",
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.16",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "next": "14.0.4",
+    "prettier": "^3.2.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "8.0.1",
+    "turbo": "^1.12.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "author": "ZechariahProsacco",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JimmyDuBuque/delenitidolorem.git"
+  },
+  "version": "1.0.0"
+}

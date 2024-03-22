@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  align-items: start;
+  padding: 3rem 2rem;
+}
+
+@media screen and (min-width: 60rem) {
+  .container {
+    padding: 6rem 2rem 2rem;
+  }
+}

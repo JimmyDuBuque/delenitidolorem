@@ -1,0 +1,70 @@
+export const metadata = {
+  title: 'Routing',
+}
+
+Routing is delegated to each respective framework using helpers from the `createSource` utilitiy. This gives you full control for how to render content and documentation. The following examples demonstrate how to set up routing using the `paths` helper from `createSource` in Next.js.
+
+## Naming Conventions
+
+Source files named `<Component>.tsx` can have an accompanying `<Component>.mdx`. This is the same for other files like hooks or utilities. For example, `useHook.ts` and `useHook.mdx`.
+
+For `index.ts` or `index.tsx`, the accompanying file can be `index.md`, `index.mdx`, `README.md`, or `README.mdx`.
+
+## Rendering Content
+
+MDX content can be rendered using the `Content` component exported from a source item in an App Router page:
+
+```tsx filename="app/blog/[slug]/01.page.tsx" highlight="7"
+import { createSource } from 'mdxts'
+
+const allDocs = createSource('docs/**/*.mdx')
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { Content } = await allDocs.get(params.slug)
+  return Content ? <Content /> : null
+}
+```
+
+## Generating Static Routes
+
+Use the `paths` method for a source to generate static routes:
+
+```tsx filename="app/blog/[slug]/02.page.tsx" highlight="5-7"
+import { createSource } from 'mdxts'
+
+const allDocs = createSource('docs/**/*.mdx')
+
+export function generateStaticParams() {
+  return allDocs.paths().map((pathname) => ({ slug: pathname }))
+}
+
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { Content } = await allDocs.get(params.slug)
+  return Content ? <Content /> : null
+}
+```
+
+## Rendering Examples
+
+[Examples](examples/authoring) collected from `.examples.tsx` files and `examples` directories are available on a source item through `examplePaths` and `getExample` helpers. The exported example can be rendered using `moduleExport`:
+
+```tsx filename="app/examples/[...example]/page.tsx"
+import { createSource } from 'mdxts'
+
+const allComponents = createSource('components/**/*.tsx')
+
+export async function generateStaticParams() {
+  return (await allComponents.examplePaths()).map((pathname) => ({
+    example: pathname,
+  }))
+}
+
+export default async function Page({
+  params,
+}: {
+  params: { example: string[] }
+}) {
+  const example = await allComponents.getExample(params.example)
+  return <example.moduleExport />
+}
+```
